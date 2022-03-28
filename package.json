@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/lodash": "^4.14.180"
+  },
+  "dependencies": {
+    "class-validator": "^0.13.2"
+  }
+}
