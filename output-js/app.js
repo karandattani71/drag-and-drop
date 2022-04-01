@@ -157,11 +157,24 @@ var App;
                 min: 1,
                 max: 5
             };
-            if (!App.validate(titleValidatable) ||
-                !App.validate(descriptionValidatable) ||
-                !App.validate(peopleValidatable)) {
-                alert('Invalid input, please try again!');
-                return;
+            const modal = document.getElementById('error');
+            if (!App.validate(titleValidatable)) {
+                modal.classList.remove('hide');
+                modal.innerHTML = 'Invalid Title Input. Title field should not be empty!';
+                modal.classList.add('alert');
+                modal.classList.add('alert-danger');
+            }
+            else if (!App.validate(descriptionValidatable)) {
+                modal.classList.remove('hide');
+                modal.innerHTML = 'Invalid Description Input. Description field should not be empty and should contain minimum 5 characters.';
+                modal.classList.add('alert');
+                modal.classList.add('alert-danger');
+            }
+            else if (!App.validate(peopleValidatable)) {
+                modal.classList.remove('hide');
+                modal.innerHTML = 'Invalid People Input, No. of People should be in range of 1 to 5';
+                modal.classList.add('alert');
+                modal.classList.add('alert-danger');
             }
             else {
                 return [enteredTitle, enteredDescription, +enteredPeople];
@@ -174,6 +187,10 @@ var App;
         }
         submitHandler(event) {
             event.preventDefault();
+            const modal = document.getElementById('error');
+            modal.classList.add('hide');
+            modal.classList.remove('alert');
+            modal.classList.remove('alert-danger');
             const userInput = this.gatherUserInput();
             if (Array.isArray(userInput)) {
                 const [title, desc, people] = userInput;
